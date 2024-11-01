@@ -11,6 +11,8 @@ factory_solution_src_code :=
 
 include $(SRC_DIR)/factory_pattern/package.mk
 
+default: all
+
 .PHONY: factory
 factory:
 	@echo "Compiling the factory pattern case and solution study files"
