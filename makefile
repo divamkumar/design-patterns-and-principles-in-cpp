@@ -23,8 +23,7 @@ factory:
 .PHONY: clean
 clean:
 	@echo "Cleaning the build directory"
-	cd build/
-	rm -rf *
+	rm -rf build/*
 	cd ..
 
 .PHONY: run
