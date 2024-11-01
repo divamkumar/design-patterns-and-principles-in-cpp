@@ -5,22 +5,30 @@
 class Singleton
 {
 private:
-  static Singleton std::unique_ptr<Singleton> instance;
-  static mutex mtx;
+  static std::unique_ptr<Singleton> instance;
+  static std::mutex mtx;
   Singleton() {}
 
 public:
   Singleton( const Singleton& other ) = delete;
+  Singleton& operator=( const Singleton& right ) = delete;
 
-  static std::unique_ptr<Singleton> getInstance()
+  static Singleton* getInstance()
   {
     if ( instance == nullptr )
     {
-      std::lock_guard<mutex> lock( mtx );
+      std::lock_guard<std::mutex> lock( mtx );
       if ( instance == nullptr )
-        instance = new Singleton();
+        instance.reset( new Singleton() );
     }
-    return instance;
+    return instance.get();
   }
-
 };
+
+std::unique_ptr<Singleton> Singleton::instance = nullptr;
+std::mutex Singleton::mtx;
+
+int main()
+{
+  return 0;
+}
