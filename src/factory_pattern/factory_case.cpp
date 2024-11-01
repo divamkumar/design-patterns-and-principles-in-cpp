@@ -5,13 +5,13 @@ class Type
 {
 public:
   Type() {}
-  Type( const Type& right ) {}
+  Type( const Type& other) {}
   Type& operator=( Type& right )
   {
     return *this;
   }
 
-  // Virtual destructor so that in the case of Type* t = new AType()
+  // Virtual destructor so that in the case of Type* t = new AType(),
   // AType's destructor can still be called through Type*
   virtual ~Type() = default;
 
@@ -19,10 +19,11 @@ public:
 
 };
 
-// Make sure to inherit publicly since private inheritance is the default
-// so that polymorphism can be achieved
-// Private inheritance is not polymorphism, but child class can explicitly
-// call base class's methods to perform polymorphism "explicitly" and hide
+// Make sure to inherit publicly so that (1) true polymorphism can be acheived
+// and (2) private inheritance is the default, preventing true polymorphism
+//
+// Private inheritance is not true polymorphism, but the child class can explicitly
+// call the base class's methods to perform polymorphism "explicitly" and hide
 // the base class interface, in a way
 class AType : public Type
 {
@@ -47,7 +48,7 @@ public:
 // by value or assigned to a base class object, and the 
 // derived attributes are "sliced off, leaving only the 
 // base class part
-// This can cause bugs and resource issues
+// This can cause bugs and memory issues
 static void printType( Type& t )
 {
   t.print();
