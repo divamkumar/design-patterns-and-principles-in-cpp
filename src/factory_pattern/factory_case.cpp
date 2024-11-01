@@ -20,10 +20,10 @@ public:
 };
 
 // Make sure to inherit publicly since private inheritance is the default
-// so that polymorphism can be achieved.
+// so that polymorphism can be achieved
 // Private inheritance is not polymorphism, but child class can explicitly
 // call base class's methods to perform polymorphism "explicitly" and hide
-// the base class interface, in a way.
+// the base class interface, in a way
 class AType : public Type
 {
 public:
@@ -46,7 +46,8 @@ public:
 // object slicing, which is when a child class is passed 
 // by value or assigned to a base class object, and the 
 // derived attributes are "sliced off, leaving only the 
-// base class part. This can cause bugs and resource issues.
+// base class part
+// This can cause bugs and resource issues
 static void printType( Type& t )
 {
   t.print();
