@@ -112,6 +112,9 @@ int main()
   std::cout << "What type of ship? (U/R): ";
   std::cin >> enemyShipOption;
 
+  // These if statements are bad because alhtough it's dynamic,
+  // it doesn't close the implementation from being modified 
+  // (someone can just change the if statements and mess the program)
   if ( enemyShipOption == "U" )
     theEnemy = std::make_unique< UfoEnemyShip >();
   else if ( enemyShipOption == "R" )
