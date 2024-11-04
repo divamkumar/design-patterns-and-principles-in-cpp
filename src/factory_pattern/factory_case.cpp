@@ -1,19 +1,69 @@
+#include <cstdint>
 #include <iostream>
 #include <memory>
+#include <string>
 
-class Type
+class EnemyShip
 {
+private:
+  std::string name;
+  std::uint32_t amtDamage;
+
 public:
-  Type() {}
-  Type( const Type& other) {}
-  Type& operator=( Type& right )
+  EnemyShip() {}
+  EnemyShip( const EnemyShip& other )
+    : name( other.name),
+      amtDamage( other.amtDamage )
+  {}
+
+  EnemyShip& operator=( const EnemyShip& right )
   {
+    if ( this != &right )
+    {
+      name = right.name;
+      amtDamage = right.damage;
+    }
     return *this;
   }
 
-  // Virtual destructor so that in the case of Type* t = new AType(),
-  // AType's destructor can still be called through Type*
-  virtual ~Type() = default;
+  // Virtual destructor so that in the case of EnemyShip* e = new AType(),
+  // AType's destructor can still be called through EnemyShip*
+  virtual ~EnemyShip() = default;
+
+  const std::string& getName() const
+  {
+    return name;
+  }
+
+  void setName( const std::string& name )
+  {
+    this->name = name;
+  }
+
+  std::uint32_t getDamage() const
+  {
+    return amtDamage;
+  }
+
+  void setDamage( std::uint32_t amtDamage )
+  {
+    this->amtDamage = amtDamage;
+  }
+
+  void followHeroShip()
+  {
+    std::cout << getName() << " is following the hero\n";
+  }
+
+  void displayEnemyShip()
+  {
+    std::cout << getName() << " is on the screen\n";
+  }
+
+  void enemyShipShoots()
+  {
+    std::cout << getName() << " attacks and does damage " << getDamage() << "\n";
+  }
 
   virtual void print() const {}
 
