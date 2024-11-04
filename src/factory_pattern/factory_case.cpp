@@ -107,7 +107,21 @@ static void doStuffEnemy( EnemyShip& anEnemyShip )
 
 int main()
 {
-  std::unique_ptr< EnemyShip > ufoShip = std::make_unique< UfoEnemyShip >();
+  std::unique_ptr< EnemyShip > theEnemy;
+  std::string enemyShipOption;
+  std::cout << "What type of ship? (U/R): ";
+  std::cin >> enemyShipOption;
 
-  doStuffEnemy( *ufoShip );
+  if ( enemyShipOption == "U" )
+    theEnemy = std::make_unique< UfoEnemyShip >();
+  else if ( enemyShipOption == "R" )
+    theEnemy = std::make_unique< RocketEnemyShip >();
+  else
+  {
+    std::cout << "Wrong input" << std::endl;
+    return 0;
+  }
+
+  doStuffEnemy( *theEnemy );
+  return 0;
 }
