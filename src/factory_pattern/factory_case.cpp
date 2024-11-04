@@ -21,13 +21,13 @@ public:
     if ( this != &right )
     {
       name = right.name;
-      amtDamage = right.damage;
+      amtDamage = right.amtDamage;
     }
     return *this;
   }
 
-  // Virtual destructor so that in the case of EnemyShip* e = new AType(),
-  // AType's destructor can still be called through EnemyShip*
+  // Virtual destructor so that in the case of EnemyShip* e = new UfoEnemyShip(),
+  // UfoEnemyShip's destructor can still be called through EnemyShip*
   virtual ~EnemyShip() = default;
 
   const std::string& getName() const
@@ -64,9 +64,6 @@ public:
   {
     std::cout << getName() << " attacks and does damage " << getDamage() << "\n";
   }
-
-  virtual void print() const {}
-
 };
 
 // Make sure to inherit publicly so that (1) true polymorphism can be acheived
@@ -75,21 +72,23 @@ public:
 // Private inheritance is not true polymorphism, but the child class can explicitly
 // call the base class's methods to perform polymorphism "explicitly" and hide
 // the base class interface, in a way
-class AType : public Type
+class UfoEnemyShip : public EnemyShip
 {
 public:
-  void print() const override
+  UfoEnemyShip()
   {
-    std::cout << "This is AType" << "\n";
+    setName( "UFO Enemy Ship" );
+    setDamage( 20 );
   }
 };
 
-class BType : public Type
+class RocketEnemyShip : public EnemyShip
 {
 public:
-  void print() const override
+  RocketEnemyShip()
   {
-    std::cout << "This is BType" << "\n";
+    setName( "Rocket Enemy Ship" );
+    setDamage( 10 );
   }
 };
 
@@ -99,27 +98,16 @@ public:
 // derived attributes are "sliced off, leaving only the 
 // base class part
 // This can cause bugs and memory issues
-static void printType( Type& t )
+static void doStuffEnemy( EnemyShip& anEnemyShip )
 {
-  t.print();
+  anEnemyShip.displayEnemyShip();
+  anEnemyShip.followHeroShip();
+  anEnemyShip.enemyShipShoots();
 }
 
 int main()
 {
-  std::unique_ptr<Type> t;
+  std::unique_ptr< EnemyShip > ufoShip = std::make_unique< UfoEnemyShip >();
 
-  char userInput; 
-  std::cout << "What type do you want? (A or B): ";
-  std::cin >> userInput;
-
-  if ( userInput == 'A' )
-    t = std::make_unique<AType>();
-  else if ( userInput == 'B' )
-    t = std::make_unique<BType>();
-  else
-  {
-    std::cout << "Invalid input" << "\n";
-    printType( *t );
-  }
-  return 0;
+  doStuffEnemy( *ufoShip );
 }

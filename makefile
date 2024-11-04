@@ -15,8 +15,7 @@ default: all
 
 .PHONY: singleton
 singleton:
-	@echo ""
-	@echo "Compiling the singleton pattern study file"
+	@printf "Compiling the singleton solution file\n"
 
 	@if [ ! -d $(BUILD_DIR) ] ; then \
 	mkdir $(BUILD_DIR) ; \
@@ -26,14 +25,14 @@ singleton:
 	@$(CXX) $(CXXFLAGS) -o $(BUILD_DIR)/singleton_solution $(BUILD_DIR)/singleton_solution.o
 
 	@if [ -f $(BUILD_DIR)/singleton_solution ] ; then \
-	echo "Running the singleton solution" ; \
+	printf "Running the singleton solution\n" ; \
 	./build/singleton_solution; \
 	fi
+	@printf "\n"
 
 .PHONY: factory
 factory:
-	@echo ""
-	@echo "Compiling the factory pattern case and solution study files"
+	@printf "Compiling the factory pattern case and solution study files\n"
 
 	@if [ ! -d $(BUILD_DIR) ] ; then \
 	mkdir $(BUILD_DIR) ; \
@@ -45,24 +44,26 @@ factory:
 	@$(CXX) $(CXXFLAGS) -o $(BUILD_DIR)/factory_solution $(BUILD_DIR)/factory_solution.o
 
 	@if [ -f $(BUILD_DIR)/factory_case ] ; then \
-	echo "" \
-	echo "Running the factory case study" ; \
+	printf "Running the factory case study\n" ; \
 	./build/factory_case; \
 	fi
 
+	@printf "\n"
+
 	@if [ -f $(BUILD_DIR)/factory_solution ] ; then \
-	echo "" \
-	echo "Running the factory solution" ; \
+	printf "Running the factory solution\n" ; \
 	./build/factory_solution; \
 	fi
 
+	@printf "\n"
+
 .PHONY: clean
 clean:
-	@echo ""
-	@echo "Cleaning the build directory"
+	@printf "Cleaning the build directory\n"
 	@if [ -d $(BUILD_DIR) ] ; then \
 	rm -rf $(BUILD_DIR)/* ; \
 	rmdir $(BUILD_DIR); \
 	fi
+	@printf "\n"
 
 all: clean singleton factory
