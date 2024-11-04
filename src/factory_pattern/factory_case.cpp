@@ -61,13 +61,15 @@ int main()
   char userInput; 
   std::cout << "What type do you want? (A or B): ";
   std::cin >> userInput;
+
   if ( userInput == 'A' )
     t = std::make_unique<AType>();
   else if ( userInput == 'B' )
     t = std::make_unique<BType>();
   else
+  {
     std::cout << "Invalid input" << "\n";
-
-  printType( *t );
+    printType( *t );
+  }
   return 0;
 }
