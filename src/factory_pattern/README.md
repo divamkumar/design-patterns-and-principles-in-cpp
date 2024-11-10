@@ -1,4 +1,6 @@
 ## Factory Pattern
+(Link to video which I am using to learn)[https://www.youtube.com/watch?v=ub0DXaeV6hA]
+
 A design pattern used when we want a function to return one of several different child class objects, which all have the same base class.
 
 ### Case study
